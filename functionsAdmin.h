@@ -146,8 +146,7 @@ void eliminarRepartidor()
 			imprimirRepartidor();
 			if (primero != NULL)
 			{
-				while (aux2 != ultimo && encontrar != true )
-				{
+				
 					do{
 						if(opcRep != 0){
 							system("cls");
@@ -161,6 +160,8 @@ void eliminarRepartidor()
 						opcRep = validarEntero1(1,2);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
 					}while(opcRep == 2);
+					while (aux2 != ultimo && encontrar != true )
+					{
 					if (aux1->id_repartidor == buscar)
 					{
 						if (aux1 == primero)
@@ -189,8 +190,9 @@ void eliminarRepartidor()
 					aux1 = aux1->siguiente;
 					(!encontrar) ? printf("No encontrado\n") : printf("");
 					system("pause");
+					}
 				}
-			}
+			
 			break;
 		case 2:
 			break;
