@@ -1,39 +1,44 @@
 
-void inicializaArchivo(FILE *arch, repartidor *pR){
-	repartidor *dato;
-	int i =0;
+void inicializaArchivo(FILE *arch)
+{
+	struct repartidor *pR;
+	pR = (repartidor *)malloc(sizeof(repartidor));
+	int i = 0;
 	char nombre[30], apellidoP[30], apellidoM[30], email[30];
 	setlocale(LC_CTYPE, "Spanish");
-	if(!(arch=fopen("estructura1.xls", "r"))){   //Primero se crea el archivo
+	if (!(arch = fopen("estructura1.xls", "r")))
+	{ //Primero se crea el archivo
 		printf("Error al intentar leer el archivo");
 		exit(1);
 	}
-	while(!feof(arch)){
+	while (!feof(arch))
+	{
 		pR = (repartidor *)malloc(sizeof(repartidor));
-		pR->r_naa.nombre  = (char*)malloc(20*sizeof(char));
-		pR->r_naa.apellidoP = (char*)malloc(20*sizeof(char));
-		pR->r_naa.apellidoM = (char*)malloc(20*sizeof(char));
-		pR->r_dg.email = (char*)malloc(30*sizeof(char));
+		pR->r_naa.nombre = (char *)malloc(20 * sizeof(char));
+		pR->r_naa.apellidoP = (char *)malloc(20 * sizeof(char));
+		pR->r_naa.apellidoM = (char *)malloc(20 * sizeof(char));
+		pR->r_dg.email = (char *)malloc(30 * sizeof(char));
 		if (pR == NULL)
 		{
 			printf("No hay espacio");
 		}
-		else{
-			fscanf(arch,"%d\t", &pR->id_repartidor);
-				printf("%d\t", pR->id_repartidor);
-			fscanf(arch,"%s\t", pR->r_naa.nombre); 
-				printf("%s", pR->r_naa.nombre);
-			fscanf(arch,"%s\t", pR->r_naa.apellidoP);
-				printf("\t%s",pR->r_naa.apellidoP);
-				fflush(stdin);
-			fscanf(arch,"%s\t", pR->r_naa.apellidoM);
-				printf("\t%s",pR->r_naa.apellidoM); 
-			fscanf(arch,"%d\t",&pR->r_dg.direccion); 
-			fscanf(arch,"%lld\t",&pR->r_dg.telefono);
-			fscanf(arch,"%s\t\n", pR->r_dg.email);
-					fflush(stdin);
-			//	printf("\t%s", &pR->r_dg.email);     
-			system("pause"); 
+		else
+		{
+			fscanf(arch, "%d\t", &pR->id_repartidor);
+			printf("%d\t", pR->id_repartidor);
+			fscanf(arch, "%s\t", pR->r_naa.nombre);
+			printf("%s", pR->r_naa.nombre);
+			fscanf(arch, "%s\t", pR->r_naa.apellidoP);
+			printf("\t%s", pR->r_naa.apellidoP);
+			fflush(stdin);
+			fscanf(arch, "%s\t", pR->r_naa.apellidoM);
+			printf("\t%s", pR->r_naa.apellidoM);
+			fscanf(arch, "%d\t", &pR->r_dg.direccion);
+			fscanf(arch, "%lld\t", &pR->r_dg.telefono);
+			fscanf(arch, "%s\t\n", pR->r_dg.email);
+			fflush(stdin);
+			//	printf("\t%s", &pR->r_dg.email);
+			system("pause");
 			if (primero == NULL)
 			{
 				primero = pR;
@@ -135,14 +140,3 @@ bool validaAgrega(FILE *arch, int valor){
 
 
 */
-
-
-
-
-
-
-
-
-
-
-

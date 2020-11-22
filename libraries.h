@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <windows.h>  
+#include <windows.h>
 #include <locale.h>
 #include <time.h>
 #include <conio.h>
@@ -22,7 +22,7 @@ typedef struct
     char *nombreC;
     char *direccion;
     unsigned long long int telefono;
-}pedidoCliente;
+} pedidoCliente;
 
 struct pedidos
 {
@@ -32,7 +32,7 @@ struct pedidos
     float totalPago;
     pedidos *siguiente;
     pedidos *anterior;
-}*primeroP, *ultimoP;
+} * primeroP, *ultimoP;
 /*-------------------------------------------------------*/
 /*---------------REGISTRO DE LOS EMPLEADOS---------------*/
 /*Tener el registro de los repartidores, nombre, apellidos, direcci?n, tel?fono,
@@ -42,45 +42,43 @@ typedef struct
     char *nombre;
     char *apellidoP;
     char *apellidoM;
-}repartidorNAA;
+} repartidorNAA;
 
 typedef struct
 {
     int direccion;
     unsigned long long int telefono;
     char *email;
-}repartidorG;
+} repartidorG;
 
 struct repartidor
 {
-	int pedi[8];
+    int pedi[8];
     int id_repartidor;
     repartidorNAA r_naa;
     repartidorG r_dg;
-    
     repartidor *siguiente;
     repartidor *anterior;
-}*primero, *ultimo;
+} *primero, *ultimo;
 /*-------------------------------------------------------*/
 struct asig
 {
-	int id_Arepa;
-	int id_Apedi;
-	asig *siguiente;
-	asig *anterior;
-}*primeroA,*ultimoA;
+    int id_Arepa;
+    int id_Apedi;
+    asig *siguiente;
+    asig *anterior;
+} * primeroA, *ultimoA;
 
 struct base
 {
-	int id_repartidor;
-	char nombre[50];
+    int id_repartidor;
+    char nombre[50];
     char apellidoP[50];
     char apellidoM[50];
     int direccion;
     int telefono;
     char email[50];
 };
-
 
 #include "validar.h"
 #include "validations.h"
