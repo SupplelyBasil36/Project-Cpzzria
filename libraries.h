@@ -29,7 +29,7 @@ struct pedidos
     int id_pedido;
     pedidoCliente p_cd;
     char *descripcion;
-    float totalPago;
+    int totalPago;
     pedidos *siguiente;
     pedidos *anterior;
 } *primeroP, *ultimoP;

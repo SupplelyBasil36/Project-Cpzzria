@@ -4,6 +4,7 @@ void inicializaArchivo(FILE *arch)
 	struct repartidor *pR;
 	pR = (repartidor *)malloc(sizeof(repartidor));
 	int i = 0;
+	char nombre[30], apellidoP[30], apellidoM[30], email[30];
 	setlocale(LC_CTYPE, "Spanish");
 	if (!(arch = fopen("estructura1.xls", "r")))
 	{ //Primero se crea el archivo
@@ -58,16 +59,17 @@ void inicializaArchivo(FILE *arch)
 	fclose(arch);
 }
 void inicializaArchivoP(FILE *archP){
-	/*struct pedidos *pP;
+	struct pedidos *pP;
+	pP = (struct pedidos *)malloc(sizeof(pedidos));
+	char nombreC[50], direccion[50], descripcion[50];
 	setlocale(LC_CTYPE, "Spanish");
 	if (!(archP = fopen("pedidos.xls", "r")))
 	{
 		printf("Error al intentar leer el archivo");
-		//exit(1);
+		exit(1);
 	}
 	while (!feof(archP))
 	{
-		pP = (struct pedidos *)malloc(sizeof(pedidos));
 		pP->descripcion = (char *)malloc(50 * sizeof(char));
 		pP->p_cd.nombreC = (char *)malloc(50 * sizeof(char));
 		pP->p_cd.direccion = (char *)malloc(50 * sizeof(char));
@@ -82,7 +84,7 @@ void inicializaArchivoP(FILE *archP){
 			fscanf(archP, "%s\t", pP->p_cd.direccion);
 			fscanf(archP, "%lld\t", &pP->p_cd.telefono);
 			fscanf(archP, "%s\t", pP->descripcion);
-			fscanf(archP, "%d\t\n", &pP->totalPago);
+			fscanf(archP, "%f\t\n", &pP->totalPago);
 			if (primeroP == NULL)
 			{
 				primeroP = pP;
@@ -100,7 +102,7 @@ void inicializaArchivoP(FILE *archP){
 			}
 		}
 	}
-	fclose(archP);*/
+	fclose(archP);
 	}
 /*
 void leeArchivo(FILE *arch){

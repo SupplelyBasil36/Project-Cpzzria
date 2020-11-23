@@ -132,6 +132,35 @@ bool validaRepartidor(int valor)
 	}
 	return encontrar;
 }
+bool validaPedido(int valor)
+{
+	struct pedidos *aux1, *aux2;
+	aux1 = primeroP;
+	aux2 = NULL;
+	bool encontrar = false;
+	int busqueda = 0;
+	if (primeroP != NULL)
+	{
+		while (aux2 != ultimoP && encontrar != true)
+		{
+			if (aux1->id_pedido == valor)
+			{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
+				printf("\a\tEl id de pedido que ingresaste ya está registrado, intenta de nuevo\n\t");
+				system("pause");
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
+				encontrar = true;
+			}
+			aux2 = aux1; 
+			aux1 = aux1->siguiente;
+			//(!encontrar) ? printf("No encontrado\n") : printf("");
+		}
+	}else{
+		printf("La lista se encuentra vacia\n");
+		system("pause");
+	}
+	return encontrar;
+}
 
 
 /* Valida que el dato ingresado sea un numero de punto flotante */

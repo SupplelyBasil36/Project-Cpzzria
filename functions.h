@@ -22,7 +22,7 @@ void menuAdmin(FILE *arch, FILE *archP)
 						printf("\n\n");
 						ingresoRepartidores(arch);
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-						printf("\t�Desea registrar otro repartidor?       1)Si       2)No\n\tOpci�n: ");
+						printf("\tDesea registrar otro repartidor?       1)Si       2)No\n\tOpcion: ");
 						opc = validarEntero1(1, 2);
 					} while (opc == 1);
 					break;
@@ -94,7 +94,7 @@ void menuAdmin(FILE *arch, FILE *archP)
 				printf("\t2) Mostrar asignaciones de pedidos\n");
 				printf("\t3) Eliminar asignaciones de pedidos\n");
 				printf("\t4) Modificar asignaciones pedidos\n");
-				printf("\t5) Salir \n\n\tOpci�n: ");
+				printf("\t5) Salir \n\n\tOpcion: ");
 				asigOpc = validarEntero1(1, 5);
 				switch (asigOpc)
 				{

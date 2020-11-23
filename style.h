@@ -28,7 +28,7 @@ void menuAdminGenera_Pedidos()
     system("cls");
     printf("\n\n\n\t");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
-    printf("\t      PEDIDOS\t\t  ");
+    printf("\t      PEDIDOS      \t\t");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
     printf("\n\n\t1) Ingresar pedidos\n");
     printf("\t2) Mostrar pedidos\n");
@@ -64,7 +64,7 @@ void immprimirReparNull()
     system("mode con: cols=80 lines=20");
     printf("\n\n\n\t");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-    printf("                  La lista se encuentra vacï¿½a                  ");
+    printf("                  La lista se encuentra vacía                  ");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
     printf("\n\n\t");
     system("pause");
@@ -75,7 +75,18 @@ void presentacionPedi()
     system("cls");
     printf("\n\n\n\t");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-    printf("                   INGRESO DE PEDIDOS                   ");
+    printf("             INGRESO DE PEDIDOS             ");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+    printf("\n\n\n");
+}
+void imprimirPedi(){
+    //IMPRESION DE PEDIDOS
+    system("mode con: cols=150 lines=40");
+    printf("\n\n\n\t");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
+    printf("\t\t\t\t\t\t\t   LISTA DE REPARTIDORES   \t\t\t\t\t\t\t");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+    printf("\n\n\tId repartidor    Nombre\t     Apellidos\t\t\t Direcciï¿½n  \tTelï¿½fono\t\tE-mail");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
     printf("\n\n\n");
 }

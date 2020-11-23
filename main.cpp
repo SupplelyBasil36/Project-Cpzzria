@@ -35,7 +35,7 @@ int main()
 			usuario();
 			break;
 		case 3:
-			printf("\n\tLa sesiï¿½n ha terminado!!! \n");
+			printf("\n\tLa sesión ha terminado!!! \n");
 			exit(0);
 			break;
 		default:
