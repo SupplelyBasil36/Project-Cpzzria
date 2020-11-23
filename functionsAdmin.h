@@ -146,18 +146,12 @@ void eliminarRepartidor()
 		} while (opcRep == 2);
 		if (primero != NULL)
 		{
-
-			printf("diferente a \n");
 			while (aux2 != ultimo && encontrar != true)
 			{
-				printf("WHILEEE\n");
-				printf("IDDDDDD%d", aux1->id_repartidor);
 				if (aux1->id_repartidor == buscar)
 				{
-					printf("encontrado\n");
 					if (aux1 == primero)
 					{
-						printf("uno\n");
 						primero = primero->siguiente;
 						primero->anterior = ultimo;
 						ultimo->siguiente = primero;
@@ -165,7 +159,6 @@ void eliminarRepartidor()
 					}
 					else if (aux1 == ultimo)
 					{
-						printf("unosadasda\n");
 						ultimo = ultimo->anterior;
 						ultimo->siguiente = primero;
 						primero->anterior = ultimo;
@@ -173,7 +166,6 @@ void eliminarRepartidor()
 					}
 					else
 					{
-						printf("ufsdfsdfsdfno\n");
 						aux2->siguiente = aux1->siguiente;
 						aux1->siguiente->anterior = aux2;
 						free(aux1);
@@ -288,7 +280,7 @@ void ingresoPedidos(FILE *archP)
 			fprintf(archP, "%s\t", pP->p_cd.nombreC);
 			fprintf(archP, "%s\t", pP->p_cd.direccion);
 			fprintf(archP, "%llu\t", pP->p_cd.telefono);
-			fprintf(arch, "%s\t", pP->descripcion);
+			fprintf(archP, "%s\t", pP->descripcion);
 			fprintf(archP, "%f\n", pP->totalPago);
 
 			if (primeroP == NULL)
@@ -310,7 +302,6 @@ void ingresoPedidos(FILE *archP)
 	}
 	fclose(archP);
 }
-
 void imprimirPedidos()
 {
 	system("cls");
@@ -338,54 +329,78 @@ void imprimirPedidos()
 }
 void eliminarPedidos()
 {
-	imprimirPedidos();
+	system("mode con: cols=75 lines=15");
+	printf("\n\n\n");
 	struct pedidos *aux1;
 	struct pedidos *aux2;
 	aux1 = primeroP;
 	aux2 = NULL;
 	bool encontrar = false;
-	int buscar = 0;
-	if (primeroP != NULL)
+	int buscar = 0, opc = 0, opcRep = 0;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+	printf("\a\t�Advertencia! Has entrado a la opci�n ELIMINAR PEDIDO\n\t�Est�s seguro que deseas continuar?\n\n");
+	printf("\t1)Continuar\t\t\t2)Regresar al menu anterior \n\n\tOpci�n: ");
+	opc = validarEntero1(1, 2);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+	switch (opc)
 	{
-		while (aux2 != ultimoP && encontrar != true)
+	case 1:
+		imprimirPedidos();
+		do
 		{
-			printf("\tIngresa el Id a eliminar-> ");
-			buscar = validarEntero1(1, 500);
-			if (aux1->id_pedido == buscar)
+			if (opcRep != 0)
 			{
-				if (aux1 == primeroP)
-				{
-					primeroP = primeroP->siguiente;
-					primeroP->anterior = ultimoP;
-					ultimoP->siguiente = primeroP;
-					free(aux1);
-				}
-				else if (aux1 == ultimoP)
-				{
-					ultimoP = ultimoP->anterior;
-					ultimoP->siguiente = primeroP;
-					primeroP->anterior = ultimoP;
-					free(aux1);
-				}
-				else
-				{
-					aux2->siguiente = aux1->siguiente;
-					aux1->siguiente->anterior = aux2;
-					free(aux1);
-				}
-
-				encontrar = true;
+				system("cls");
+				imprimirPedidos();
 			}
-			aux2 = aux1;
-			aux1 = aux1->siguiente;
+			printf("\tIngresa el Id que deseas eliminar: \n\t");
+			buscar = validarEntero1(1, 500);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+			printf("\a\tSe eliminar� el pedido %d\t�Est�s seguro que deseas continuar?\n\n", buscar);
+			printf("\t1)Continuar\t\t\t\t2)Cancelar \n\n\tOpci�n: ");
+			opcRep = validarEntero1(1, 2);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+		} while (opcRep == 2);
+		if (primeroP != NULL)
+		{
+			while (aux2 != ultimoP && encontrar != true)
+			{
+				buscar = validarEntero1(1, 500);
+				if (aux1->id_pedido == buscar)
+				{
+					if (aux1 == primeroP)
+					{
+						primeroP = primeroP->siguiente;
+						primeroP->anterior = ultimoP;
+						ultimoP->siguiente = primeroP;
+						free(aux1);
+					}
+					else if (aux1 == ultimoP)
+					{
+						ultimoP = ultimoP->anterior;
+						ultimoP->siguiente = primeroP;
+						primeroP->anterior = ultimoP;
+						free(aux1);
+					}
+					else
+					{
+						aux2->siguiente = aux1->siguiente;
+						aux1->siguiente->anterior = aux2;
+						free(aux1);
+					}
+
+					encontrar = true;
+				}
+				aux2 = aux1;
+				aux1 = aux1->siguiente;
+			}
 			(!encontrar) ? printf("No encontrado\n") : printf("");
-			system("pause");
 		}
-	}
-	else
-	{
-		printf("La lista se encuentra vacia\n");
-		system("pause");
+		break;
+	case 2:
+		break;	
+	default:
+		break;
 	}
 }
 void modificarPedidos()
@@ -404,20 +419,21 @@ void modificarPedidos()
 			fflush(stdin);
 			if (aux->id_pedido == busqueda)
 			{
-				printf("Nombre cliente: \n");
-				scanf("%[^\n]", aux->p_cd.nombreC);
 				fflush(stdin);
-				printf("Direccion: \n");
-				scanf("%[^\n]", aux->p_cd.direccion);
+				printf("\tNombre cliente: \n\t");
+				validarCadena(&aux->p_cd.nombreC, 20);
 				fflush(stdin);
-				printf("Telefono: \n");
-				scanf("%d", &aux->p_cd.telefono);
+				printf("\tDireccion: \n\t");
+				validarDireccion(&aux->p_cd.direccion, 40);
 				fflush(stdin);
-				printf("Descripcion: \n");
-				scanf("%[^\n]", aux->descripcion);
+				printf("\tTel�fono (10 D�gitos): \n\t");
+				aux->p_cd.telefono = validarTelefono(1000000000, 9999999999);
 				fflush(stdin);
-				printf("Total pago: \n");
-				scanf("%f", &aux->totalPago);
+				printf("\tDescripci�n: \n\t");
+				validarCadena(&aux->descripcion, 20);
+				fflush(stdin);
+				printf("\tPrecio total: \n\t");
+				aux->totalPago = validarFlotante(100, 500);
 				fflush(stdin);
 				encontrar = true;
 			}
