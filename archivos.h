@@ -58,7 +58,52 @@ void inicializaArchivo(FILE *arch)
 	}
 	fclose(arch);
 }
-
+void inicializaArchivoP(FILE *archP){
+	struct pedidos *pP;
+	pP = (struct pedidos *)malloc(sizeof(pedidos));
+	char nombreC[50], direccion[50], descripcion[50];
+	setlocale(LC_CTYPE, "Spanish");
+	if (!(arch = fopen("pedidos.xls", "r")))
+	{
+		printf("Error al intentar leer el archivo");
+		exit(1);
+	}
+	while (!feof(archP))
+	{
+		pP->descripcion = (char *)malloc(50 * sizeof(char));
+		pP->p_cd.nombreC = (char *)malloc(50 * sizeof(char));
+		pP->p_cd.direccion = (char *)malloc(50 * sizeof(char));
+		if (pP == NULL)
+		{
+			printf("No hay espacio");
+		}
+		else
+		{
+			fscanf(archP, "%d\t", &pP->id_pedido);
+			fscanf(archP, "%s\t", pP->p_cd.nombreC);
+			fscanf(archP, "%s\t", pP->p_cd.direccion);
+			fscanf(archP, "%lld\t", &pP->p_cd.telefono);
+			fscanf(archP, "%s\t", pP->descripcion);
+			fscanf(archP, "%f\t\n", &pP->totalPago);
+			if (primeroP == NULL)
+			{
+				primeroP = pP;
+				primeroP->siguiente = primeroP;
+				primeroP->anterior = ultimoP;
+				ultimoP = pP;
+			}
+			else
+			{
+				ultimoP->siguiente = pP;
+				pP->siguiente = primeroP;
+				pP->anterior = ultimoP;
+				ultimoP = pP;
+				primeroP->anterior = ultimoP;
+			}
+		}
+	}
+	fclose(archP);
+	}
 /*
 void leeArchivo(FILE *arch){
 	setlocale(LC_CTYPE, "Spanish");

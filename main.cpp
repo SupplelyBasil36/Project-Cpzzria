@@ -3,6 +3,7 @@
 int main()
 {
 	FILE *arch = NULL;
+	FILE *archP = NULL;
 	system("mode con: cols=73 lines=43");
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	portada();
@@ -11,6 +12,7 @@ int main()
 	setlocale(LC_CTYPE, "Spanish");
 	int opcPrincipal = 0;
 	inicializaArchivo(arch);
+	inicializaArchivoP(archP);
 
 	while (opcPrincipal != 3)
 	{
@@ -27,7 +29,7 @@ int main()
 		switch (opcPrincipal)
 		{
 		case 1:
-			menuAdmin(arch);
+			menuAdmin(arch, archP);
 			break;
 		case 2:
 			usuario();

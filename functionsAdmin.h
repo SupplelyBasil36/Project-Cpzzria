@@ -9,83 +9,76 @@ void ingresoRepartidores(FILE *arch)
 		printf("Error al intentar crear el archivo");
 		exit(1);
 	}
-
-	system("cls");
-	printf("\n\n\n\t");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-	printf("                   INGRESO DE REPARTIDORES                   ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-	printf("\n\n\n");
-	struct repartidor *pR;
-	pR = (repartidor *)malloc(sizeof(repartidor));
-	if (pR == NULL)
-	{
-		printf("No hay espacio");
-	}
 	else
 	{
-		do
-		{
-			if (foco != 0)
-			{
-				system("cls");
-				printf("\n\n\n\t");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-				printf("                   INGRESO DE REPARTIDORES                   ");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-				printf("\n\n\n");
-			}
-			printf("\tId_Repartidor: \n\t");
-			num = validarEntero1(1, 500);
-			bandera = validaRepartidor(num); //validaAgrega(arch, num, pR);
-			foco++;
-		} while (bandera);
-		pR->id_repartidor = num;
-		printf("\tNombre: \n\t");
-		validarCadena(&pR->r_naa.nombre, 20);
-		fflush(stdin);
-		printf("\tApellido paterno: \n\t");
-		validarCadena(&pR->r_naa.apellidoP, 20);
-		fflush(stdin);
-		printf("\tApellido Materno: \n\t");
-		validarCadena(&pR->r_naa.apellidoM, 20);
-		fflush(stdin);
-		printf("\tDirecci�n: (N�mero entre 1 y 200)\n\t");
-		pR->r_dg.direccion = validarEntero1(1, 200);
-		fflush(stdin);
-		printf("\tTel�fono (10 D�gitos): \n\t");
-		pR->r_dg.telefono = validarTelefono(1000000000, 9999999999);
-		printf("\tE-mail: \n\t");
-		validarCorreo1(&pR->r_dg.email, 40);
-		fflush(stdin);
 
-		fprintf(arch, "%d\t", pR->id_repartidor);
-		fprintf(arch, "%s\t", pR->r_naa.nombre);
-		fprintf(arch, "%s\t", pR->r_naa.apellidoP);
-		fprintf(arch, "%s\t", pR->r_naa.apellidoM);
-		fprintf(arch, "%d\t", pR->r_dg.direccion);
-		fprintf(arch, "%llu\t", pR->r_dg.telefono);
-		fprintf(arch, "%s\n", pR->r_dg.email);
-
-		if (primero == NULL)
+		presentacionRepar();
+		struct repartidor *pR;
+		pR = (repartidor *)malloc(sizeof(repartidor));
+		if (pR == NULL)
 		{
-			primero = pR;
-			primero->siguiente = primero;
-			primero->anterior = ultimo;
-			ultimo = pR;
+			printf("No hay espacio");
 		}
 		else
 		{
-			ultimo->siguiente = pR;
-			pR->siguiente = primero;
-			pR->anterior = ultimo;
-			ultimo = pR;
-			primero->anterior = ultimo;
+			do
+			{
+				if (foco != 0)
+				{
+					presentacionRepar();
+				}
+				printf("\tId_Repartidor: \n\t");
+				num = validarEntero1(1, 500);
+				bandera = validaRepartidor(num); //validaAgrega(arch, num, pR);
+				foco++;
+			} while (bandera);
+			pR->id_repartidor = num;
+			printf("\tNombre: \n\t");
+			validarCadena(&pR->r_naa.nombre, 20);
+			fflush(stdin);
+			printf("\tApellido paterno: \n\t");
+			validarCadena(&pR->r_naa.apellidoP, 20);
+			fflush(stdin);
+			printf("\tApellido Materno: \n\t");
+			validarCadena(&pR->r_naa.apellidoM, 20);
+			fflush(stdin);
+			printf("\tDirecci�n: (N�mero entre 1 y 200)\n\t");
+			pR->r_dg.direccion = validarEntero1(1, 200);
+			fflush(stdin);
+			printf("\tTel�fono (10 D�gitos): \n\t");
+			pR->r_dg.telefono = validarTelefono(1000000000, 9999999999);
+			printf("\tE-mail: \n\t");
+			validarCorreo1(&pR->r_dg.email, 40);
+			fflush(stdin);
+
+			fprintf(arch, "%d\t", pR->id_repartidor);
+			fprintf(arch, "%s\t", pR->r_naa.nombre);
+			fprintf(arch, "%s\t", pR->r_naa.apellidoP);
+			fprintf(arch, "%s\t", pR->r_naa.apellidoM);
+			fprintf(arch, "%d\t", pR->r_dg.direccion);
+			fprintf(arch, "%llu\t", pR->r_dg.telefono);
+			fprintf(arch, "%s\n", pR->r_dg.email);
+
+			if (primero == NULL)
+			{
+				primero = pR;
+				primero->siguiente = primero;
+				primero->anterior = ultimo;
+				ultimo = pR;
+			}
+			else
+			{
+				ultimo->siguiente = pR;
+				pR->siguiente = primero;
+				pR->anterior = ultimo;
+				ultimo = pR;
+				primero->anterior = ultimo;
+			}
+			printf("\n\tProcesando...\n");
+			Sleep(2000);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+			printf("\a\n\tLos datos del repartidor se han registrado con �xito\n\n");
 		}
-		printf("\n\tProcesando...\n");
-		Sleep(2000);
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-		printf("\a\n\tLos datos del repartidor se han registrado con �xito\n\n");
 	}
 	fclose(arch);
 }
@@ -96,14 +89,7 @@ void imprimirRepartidor()
 	actual = primero;
 	if (primero != NULL)
 	{
-		system("mode con: cols=150 lines=40");
-		printf("\n\n\n\t");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-		printf("\t\t\t\t\t\t\t   LISTA DE REPARTIDORES   \t\t\t\t\t\t\t");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-		printf("\n\n\tId repartidor    Nombre\t     Apellidos\t\t\t Direcci�n  \tTel�fono\t\tE-mail");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		printf("\n\n\n");
+		imprimirRepar();
 		do
 		{
 			printf("%10d", actual->id_repartidor);
@@ -120,13 +106,7 @@ void imprimirRepartidor()
 	}
 	else
 	{
-		system("mode con: cols=80 lines=20");
-		printf("\n\n\n\t");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-		printf("                  La lista se encuentra vac�a                  ");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		printf("\n\n\t");
-		system("pause");
+		immprimirReparNull();
 	}
 }
 void eliminarRepartidor()
@@ -256,52 +236,79 @@ void modificarRepartidor()
 }
 /***************************************************************************************************/
 /**************************************PEDIDOS******************************************************/
-void ingresoPedidos()
+void ingresoPedidos(FILE *archP)
 {
-	system("cls");
-	printf("Ingreso de pedidos\n");
-	struct pedidos *pP;
-	pP = (struct pedidos *)malloc(sizeof(struct pedidos));
-	if (pP == NULL)
+	bool bandera = true;
+	int num = 0, foco = 0;
+	if (!(archP = fopen("pedidos.xls", "a+")))
 	{
-		printf("No hay espacio");
+		printf("Error al intentar crear el archivo");
+		exit(1);
 	}
 	else
 	{
-		printf("\tId_Pedido: \n\t");
-		pP->id_pedido = validarEntero1(1, 500); // validar si es entero // validar que no se repita
-		fflush(stdin);
-		printf("\tNombre cliente: \n\t");
-		validarCadena(&pP->p_cd.nombreC, 20);
-		fflush(stdin);
-		printf("\tDirecci�n: \n\t");
-		validarDireccion(&pP->p_cd.direccion, 40);
-		fflush(stdin);
-		printf("\tTel�fono (10 D�gitos): \n\t");
-		pP->p_cd.telefono = validarTelefono(1000000000, 9999999999);
-		fflush(stdin);
-		printf("\tDescripci�n: \n\t");
-		validarCadena(&pP->descripcion, 20);
-		fflush(stdin);
-		printf("\tPrecio total: \n\t");
-		pP->totalPago = validarFlotante(100, 500);
-		fflush(stdin);
-		if (primeroP == NULL)
+		presentacionPedi(;
+		struct pedidos *pP;
+		pP = (struct pedidos *)malloc(sizeof(struct pedidos));
+		if (pP == NULL)
 		{
-			primeroP = pP;
-			primeroP->siguiente = primeroP;
-			primeroP->anterior = ultimoP;
-			ultimoP = pP;
+			printf("No hay espacio");
 		}
 		else
 		{
-			ultimoP->siguiente = pP;
-			pP->siguiente = primeroP;
-			pP->anterior = ultimoP;
-			ultimoP = pP;
-			primeroP->anterior = ultimoP;
+			do
+			{
+				if (foco != 0)
+				{
+					presentacionPedi();
+				}
+				printf("\tId_Pedido: \n\t");
+				num = validarEntero1(1, 500);
+				bandera = validaRepartidor(num); //validaAgrega(arch, num, pR);
+				foco++;
+			} while (bandera);
+			fflush(stdin);
+			printf("\tNombre cliente: \n\t");
+			validarCadena(&pP->p_cd.nombreC, 20);
+			fflush(stdin);
+			printf("\tDireccion: \n\t");
+			validarDireccion(&pP->p_cd.direccion, 40);
+			fflush(stdin);
+			printf("\tTel�fono (10 D�gitos): \n\t");
+			pP->p_cd.telefono = validarTelefono(1000000000, 9999999999);
+			fflush(stdin);
+			printf("\tDescripci�n: \n\t");
+			validarCadena(&pP->descripcion, 20);
+			fflush(stdin);
+			printf("\tPrecio total: \n\t");
+			pP->totalPago = validarFlotante(100, 500);
+			fflush(stdin);
+
+			fprintf(archP, "%d\t", pP->id_pedido);
+			fprintf(archP, "%s\t", pP->p_cd.nombreC);
+			fprintf(archP, "%s\t", pP->p_cd.direccion);
+			fprintf(archP, "%llu\t", pP->p_cd.telefono);
+			fprintf(arch, "%s\t", pP->descripcion);
+			fprintf(archP, "%f\n", pP->totalPago);
+
+			if (primeroP == NULL)
+			{
+				primeroP = pP;
+				primeroP->siguiente = primeroP;
+				primeroP->anterior = ultimoP;
+				ultimoP = pP;
+			}
+			else
+			{
+				ultimoP->siguiente = pP;
+				pP->siguiente = primeroP;
+				pP->anterior = ultimoP;
+				ultimoP = pP;
+				primeroP->anterior = ultimoP;
+			}
 		}
 	}
+	fclose(archP);
 }
 
 void imprimirPedidos()

@@ -32,7 +32,7 @@ struct pedidos
     float totalPago;
     pedidos *siguiente;
     pedidos *anterior;
-} * primeroP, *ultimoP;
+} *primeroP, *ultimoP;
 /*-------------------------------------------------------*/
 /*---------------REGISTRO DE LOS EMPLEADOS---------------*/
 /*Tener el registro de los repartidores, nombre, apellidos, direcci?n, tel?fono,
@@ -59,8 +59,8 @@ struct repartidor
     repartidorG r_dg;
     repartidor *siguiente;
     repartidor *anterior;
-} *primero, *ultimo;
-/*-------------------------------------------------------*/
+} * primero, *ultimo;
+/*---------------------------------ASIGNACIONES----------------------*/
 struct asig
 {
     int id_Arepa;
@@ -69,19 +69,9 @@ struct asig
     asig *anterior;
 } * primeroA, *ultimoA;
 
-struct base
-{
-    int id_repartidor;
-    char nombre[50];
-    char apellidoP[50];
-    char apellidoM[50];
-    int direccion;
-    int telefono;
-    char email[50];
-};
-
 #include "validar.h"
 #include "validations.h"
+#include "style.h"
 #include "functionsAdmin.h"
 #include "functions.h"
 #include "decorar.h"

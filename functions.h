@@ -1,32 +1,16 @@
-void menuAdmin(FILE *arch)
+void menuAdmin(FILE *arch, FILE *archP)
 {
 	int eleccion = 0, repaOpc = 0, pediOpc = 0, opc = 1, opcP = 1, asigOpc = 0, opcA = 0;
 	do
 	{
-		system("mode con: cols=40 lines=20");
-		system("cls");
-		printf("\n\n\n\t");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
-		printf("   MENU ADMINISTRADOR   ");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		printf("\n\n\t1) Repartidores\n\t2) Pedidos\n\t3) Asignacion de pedidos\n\t4) Salir \n\n\tOpci�n: ");
+		menuAdminGeneral();
 		eleccion = validarEntero1(1, 4);
 		switch (eleccion)
 		{
 		case 1:
 			do
 			{
-				system("mode con: cols=50 lines=20");
-				system("cls");
-				printf("\n\n\n\t");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
-				printf("\t   REPARTIDORES           ");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-				printf("\n\n\t1) Ingresar repartidor\n");
-				printf("\t2) Mostrar lista de repartidores\n");
-				printf("\t3) Eliminar repartidor\n");
-				printf("\t4) Modificar datos repartidor\n");
-				printf("\t5) Salir \n\n\tOpci�n: ");
+				menuAdminGenera_Repartidor();
 				repaOpc = validarEntero1(1, 5);
 				switch (repaOpc)
 				{
@@ -66,24 +50,14 @@ void menuAdmin(FILE *arch)
 		case 2:
 			do
 			{
-				system("mode con: cols=50 lines=20");
-				system("cls");
-				printf("\n\n\n\t");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
-				printf("\t      PEDIDOS\t\t  ");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-				printf("\n\n\t1) Ingresar pedidos\n");
-				printf("\t2) Mostrar pedidos\n");
-				printf("\t3) Eliminar pedidos\n");
-				printf("\t4) Modificar datos pedidos\n");
-				printf("\t5) Salir \n\n\tOpci�n: ");
+				menuAdminGenera_Pedidos();
 				pediOpc = validarEntero1(1, 5);
 				switch (pediOpc)
 				{
 				case 1:
 					do
 					{
-						ingresoPedidos();
+						ingresoPedidos(archP);
 						printf("Desea registrar otro pedido? 1)Si 2)No\n");
 						scanf("%d", &opcP);
 					} while (opcP == 1);

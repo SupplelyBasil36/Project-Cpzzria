@@ -95,7 +95,7 @@ bool validaAgrega(FILE *arch, int valor, repartidor *pR){
 		fscanf(arch,"%[^\t]\n",pR->r_dg.email); 
 		
 		if(valor == pR->id_repartidor){
-			printf("El Se encontró coin %d", valor);
+			printf("El Se encontrï¿½ coin %d", valor);
 			bandera = true;
 		}
 	}
@@ -117,7 +117,7 @@ bool validaRepartidor(int valor)
 			if (aux1->id_repartidor == valor)
 			{
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
-				printf("\a\tEl Id que ingresaste ya está registrado, intenta de nuevo\n\t");
+				printf("\a\tEl Id que ingresaste ya estï¿½ registrado, intenta de nuevo\n\t");
 				system("pause");
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
 				encontrar = true;
@@ -133,29 +133,6 @@ bool validaRepartidor(int valor)
 	return encontrar;
 }
 
-int busqEli(int valor)
-{
-	struct repartidor *aux1, *aux2;
-	aux1 = primero;
-	aux2 = NULL;
-	bool encontrar = false;
-	int busqueda = 0;
-	if (primero != NULL)
-	{
-		while (aux2 != ultimo && encontrar != true)
-		{
-			if (aux1->id_repartidor == valor)
-			{
-				return aux1->id_repartidor;
-			}
-			aux2 = aux1; 
-			aux1 = aux1->siguiente;
-		}
-	}else{
-		printf("La lista se encuentra vacia\n");
-		system("pause");
-	}
-}
 
 /* Valida que el dato ingresado sea un numero de punto flotante */
 double validarFlotante( float min, float max )
