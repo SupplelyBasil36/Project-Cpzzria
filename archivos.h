@@ -1,12 +1,10 @@
-
 void inicializaArchivo(FILE *arch)
 {
 	struct repartidor *pR;
-	pR = (repartidor *)malloc(sizeof(repartidor));
 	int i = 0;
 	setlocale(LC_CTYPE, "Spanish");
 	if (!(arch = fopen("estructura1.xls", "r")))
-	{ //Primero se crea el archivo
+	{ 
 		printf("Error al intentar leer el archivo");
 		exit(1);
 	}
@@ -24,20 +22,14 @@ void inicializaArchivo(FILE *arch)
 		else
 		{
 			fscanf(arch, "%d\t", &pR->id_repartidor);
-			printf("%d\t", pR->id_repartidor);
 			fscanf(arch, "%s\t", pR->r_naa.nombre);
-			printf("%s", pR->r_naa.nombre);
 			fscanf(arch, "%s\t", pR->r_naa.apellidoP);
-			printf("\t%s", pR->r_naa.apellidoP);
 			fflush(stdin);
 			fscanf(arch, "%s\t", pR->r_naa.apellidoM);
-			printf("\t%s", pR->r_naa.apellidoM);
 			fscanf(arch, "%d\t", &pR->r_dg.direccion);
 			fscanf(arch, "%lld\t", &pR->r_dg.telefono);
 			fscanf(arch, "%s\t\n", pR->r_dg.email);
 			fflush(stdin);
-			//	printf("\t%s", &pR->r_dg.email);
-			system("pause");
 			if (primero == NULL)
 			{
 				primero = pR;
@@ -58,19 +50,18 @@ void inicializaArchivo(FILE *arch)
 	fclose(arch);
 }
 void inicializaArchivoP(FILE *archP){
-	/*struct pedidos *pP;
+	struct pedidos *pP;
 	setlocale(LC_CTYPE, "Spanish");
 	if (!(archP = fopen("pedidos.xls", "r")))
 	{
 		printf("Error al intentar leer el archivo");
-		//exit(1);
+		exit(1);
 	}
 	while (!feof(archP))
 	{
 		pP = (struct pedidos *)malloc(sizeof(pedidos));
 		pP->descripcion = (char *)malloc(50 * sizeof(char));
-		pP->p_cd.nombreC = (char *)malloc(50 * sizeof(char));
-		pP->p_cd.direccion = (char *)malloc(50 * sizeof(char));
+		pP->p_cd.nombreC = (char *)malloc(20 * sizeof(char));
 		if (pP == NULL)
 		{
 			printf("No hay espacio");
@@ -78,11 +69,13 @@ void inicializaArchivoP(FILE *archP){
 		else
 		{
 			fscanf(archP, "%d\t", &pP->id_pedido);
+			fflush(stdin);
 			fscanf(archP, "%s\t", pP->p_cd.nombreC);
-			fscanf(archP, "%s\t", pP->p_cd.direccion);
+			fscanf(archP, "%d\t", &pP->p_cd.direccion);
 			fscanf(archP, "%lld\t", &pP->p_cd.telefono);
-			fscanf(archP, "%s\t", pP->descripcion);
-			fscanf(archP, "%d\t\n", &pP->totalPago);
+			fscanf(archP, "%[^\t]", pP->descripcion);
+			fscanf(archP, "%f\t\n", &pP->totalPago);
+			fflush(stdin);
 			if (primeroP == NULL)
 			{
 				primeroP = pP;
@@ -100,8 +93,60 @@ void inicializaArchivoP(FILE *archP){
 			}
 		}
 	}
-	fclose(archP);*/
+	fclose(archP);
 	}
+//Extraer del archivo datos, validar con if que sea el buscado almacenar en vector los valores que sean iguales al buscado
+void inicializaArchivoA(FILE *archA){
+	struct asig *pA;
+	int contador = 0;
+	char aux[50], aux2[50];
+	int auxI, auxD;
+	setlocale(LC_CTYPE, "Spanish");
+	if (!(archA = fopen("asignaciones.xls", "r")))
+	{
+		printf("Error al intentar leer el archivo");
+		exit(1);
+	}
+	while (!feof(archA))
+	{
+		pA = (struct asig *)malloc(sizeof(asig));
+		pA->nP = (char *)malloc(50 * sizeof(char));
+		pA->nR = (char *)malloc(50 * sizeof(char));
+		printf("while\n");
+		if (pA == NULL)
+		{
+			printf("No hay espacio");
+		}
+		else
+		{
+			printf("else\n");
+			fscanf(archA, "%d\t", &pA->id_Arepa);
+			fscanf(archA, "%s\t", pA->nR);
+			fscanf(archA, "%d\t", &pA->d1);
+			fscanf(archA, "%d\t", &pA->id_Apedi);
+			fscanf(archA, "%s\t", pA->nP);
+			fscanf(archA, "%d\n", &pA->d2);
+			
+			if (primeroA == NULL)
+			{
+				primeroA = pA;
+				primeroA->siguiente = primeroA;
+				primeroA->anterior = ultimoA;
+				ultimoA = pA;
+			}
+			else
+			{
+				ultimoA->siguiente = pA;
+				pA->siguiente = primeroA;
+				pA->anterior = ultimoA;
+				ultimoA = pA;
+				primeroA->anterior = ultimoA;
+			}
+		}
+		contador += 1;
+	}
+	fclose(archA);
+}
 /*
 void leeArchivo(FILE *arch){
 	setlocale(LC_CTYPE, "Spanish");
@@ -157,6 +202,7 @@ void agregaEstructura1(FILE *arch, Pruebas *pEst1){
 bool validaAgrega(FILE *arch, int valor){
 	setlocale(LC_CTYPE, "Spanish");
 	Pruebas dato;
+	int pedi[8];
 	bool bandera= false;
 
 	if(!(arch=fopen("estructura1.xls", "r"))){
@@ -172,9 +218,11 @@ bool validaAgrega(FILE *arch, int valor){
 		
 		if(valor == dato.id_prueba){
 			bandera=true;
+			int[8] = dato.idPedido;
 		}
 	}
 	fclose(arch);
+	kruskal(array);
 	return bandera;
 }
 

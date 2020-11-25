@@ -1,6 +1,6 @@
-void menuAdmin(FILE *arch, FILE *archP)
+void menuAdmin(FILE *arch, FILE *archP, FILE *archA)
 {
-	int eleccion = 0, repaOpc = 0, pediOpc = 0, opc = 1, opcP = 1, asigOpc = 0, opcA = 0;
+	int eleccion = 0, repaOpc = 0, pediOpc = 0, opc = 1, opcP = 1, asigOpc = 0, opcA = 0, q = 0;
 	do
 	{
 		menuAdminGeneral();
@@ -46,7 +46,6 @@ void menuAdmin(FILE *arch, FILE *archP)
 				}
 			} while (repaOpc != 5);
 			break;
-			/******/
 		case 2:
 			do
 			{
@@ -80,39 +79,28 @@ void menuAdmin(FILE *arch, FILE *archP)
 				}
 			} while (pediOpc != 5);
 			break;
-			/******/
 		case 3:
 			do
 			{
-				system("mode con: cols=53 lines=20");
-				system("cls");
-				printf("\n\n\n\t");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
-				printf("\tASIGNACION DE PEDIDOS\t     ");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-				printf("\n\n\t1) Asignar pedidos\n");
-				printf("\t2) Mostrar asignaciones de pedidos\n");
-				printf("\t3) Eliminar asignaciones de pedidos\n");
-				printf("\t4) Modificar asignaciones pedidos\n");
-				printf("\t5) Salir \n\n\tOpcion: ");
+				menuAsignaciones_General();
 				asigOpc = validarEntero1(1, 5);
 				switch (asigOpc)
 				{
 				case 1:
 					do
 					{
-						asignaciones();
+						asignaciones(archA);
 						printf("Desea asignar otro pedido? 1)Si 2)No\n");
 						scanf("%d", &opcA);
 					} while (opcA == 1);
 					break;
 				case 2:
-					//imprimirPedidos();
+					mostrarAsignaciones();
 					break;
-				case 3:
-					//eliminarAsignaciones();
+				case 3://Eliminar basandose en pedido
+					eliminarAsignaciones();
 					break;
-				case 4:
+				case 4://Modificar basandose en pedido pero modificar repartidor
 					//modificarAsignaciones();
 					break;
 				case 5:

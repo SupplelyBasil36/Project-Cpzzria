@@ -1,0 +1,97 @@
+/*******************************************************BUSCADORES PARA ELIMINACION DIRECTA********************************************************************/
+void eliminarPedidosDirecta(int eliPed)
+{
+	struct pedidos *aux1;
+	struct pedidos *aux2;
+	aux1 = primeroP;
+	aux2 = NULL;
+	bool encontrar = false;
+	int buscar = 0, opc = 0, opcRep = 0;
+	
+	if (primeroP != NULL)
+	{
+		while (aux2 != ultimoP && encontrar != true)
+		{
+			if (aux1->id_pedido == eliPed)
+			{
+				if (aux1 == primeroP)
+				{
+					primeroP = primeroP->siguiente;
+					primeroP->anterior = ultimoP;
+					ultimoP->siguiente = primeroP;
+					ultimoP->siguiente = primeroP;
+					free(aux1);
+				}
+				else if (aux1 == ultimoP)
+				{
+					ultimoP = ultimoP->anterior;
+					ultimoP->siguiente = primeroP;
+					primeroP->anterior = ultimoP;
+					free(aux1);
+				}
+				else
+				{
+					aux2->siguiente = aux1->siguiente;
+					aux1->siguiente->anterior = aux2;
+					free(aux1);
+				}
+					encontrar = true;
+			}
+			aux2 = aux1;
+			aux1 = aux1->siguiente;
+		}
+	}
+}
+/*BUSCAR RAPARTIDORES Y PEDIDOS IMPRESION SOLAMENTE*/
+void bRepa(int x)
+{
+
+	struct repartidor *aux;
+	aux = primero;
+	bool encontrar = false;
+	int busqueda = 0;
+	if (primero != NULL)
+	{
+		while (aux != NULL && encontrar != true)
+		{
+			if (aux->id_repartidor == x)
+			{
+				printf("%s\t", aux->r_naa.nombre);
+				printf("%s", aux->r_naa.apellidoP);
+				encontrar = true;
+			}
+			aux = aux->siguiente;
+		}
+		(!encontrar) ? printf("No encontrado\n") : printf("");
+	}
+	else
+	{
+		printf("La lista repartidores se encuentra vacia\n");
+	}
+}
+void bPedi(int x)
+{
+
+	struct pedidos *aux;
+	aux = primeroP;
+	bool encontrar = false;
+	int busqueda = 0;
+	if (primeroP != NULL)
+	{
+		while (aux != NULL && encontrar != true)
+		{
+			if (aux->id_pedido == x)
+			{
+				printf("%s\t", aux->p_cd.nombreC);
+				printf("%s", aux->p_cd.direccion);
+				encontrar = true;
+			}
+			aux = aux->siguiente;
+		}
+		(!encontrar) ? printf("No encontrado\n") : printf("");
+	}
+	else
+	{
+		printf("La lista pedidos se encuentra vacia\n");
+	}
+}

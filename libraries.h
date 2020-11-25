@@ -20,7 +20,7 @@ e) Total a pagar.*/
 typedef struct
 {
     char *nombreC;
-    char *direccion;
+    int direccion;
     unsigned long long int telefono;
 } pedidoCliente;
 
@@ -29,7 +29,7 @@ struct pedidos
     int id_pedido;
     pedidoCliente p_cd;
     char *descripcion;
-    int totalPago;
+    float totalPago;
     pedidos *siguiente;
     pedidos *anterior;
 } *primeroP, *ultimoP;
@@ -53,24 +53,28 @@ typedef struct
 
 struct repartidor
 {
-    int pedi[8];
     int id_repartidor;
     repartidorNAA r_naa;
     repartidorG r_dg;
     repartidor *siguiente;
     repartidor *anterior;
-} * primero, *ultimo;
+} *primero, *ultimo;
 /*---------------------------------ASIGNACIONES----------------------*/
 struct asig
 {
+    char *nP;
+    char *nR;
+    int d1;
+    int d2;
     int id_Arepa;
     int id_Apedi;
     asig *siguiente;
     asig *anterior;
-} * primeroA, *ultimoA;
+} *primeroA, *ultimoA;
 
 #include "validar.h"
 #include "validations.h"
+#include "buscadores.h"
 #include "style.h"
 #include "functionsAdmin.h"
 #include "functions.h"

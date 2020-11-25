@@ -1,3 +1,13 @@
+void menuGeneral()
+{
+	system("mode con: cols=40 lines=20");
+	system("cls");
+	printf("\n\n\n\t");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
+	printf("     MENU PRINCIPAL     ");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+	printf("\n\n\t1) Administrador\n\t2) Usuario\n\t3) Salir\n\n\tOpciï¿½n: ");
+}
 void menuAdminGeneral()
 {
     system("mode con: cols=40 lines=20");
@@ -36,6 +46,20 @@ void menuAdminGenera_Pedidos()
     printf("\t4) Modificar datos pedidos\n");
     printf("\t5) Salir \n\n\tOpciï¿½n: ");
 }
+void menuAsignaciones_General()
+{
+	system("mode con: cols=53 lines=20");
+	system("cls");
+	printf("\n\n\n\t");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 225);
+	printf("\tASIGNACION DE PEDIDOS\t     ");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+	printf("\n\n\t1) Asignar pedidos\n");
+	printf("\t2) Mostrar asignaciones de pedidos\n");
+	//printf("\t3) Eliminar asignaciones de pedidos\n"); 
+	//printf("\t4) Modificar asignaciones pedidos\n"); 
+	printf("\t5) Salir \n\n\tOpcion: ");
+}
 void presentacionRepar()
 {
     //PRESENTACION INGRESO DE REPARTIDORES
@@ -46,7 +70,6 @@ void presentacionRepar()
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
     printf("\n\n\n");
 }
-
 void imprimirRepar(){
     //IMPRESION DE REPARTIDORES
     system("mode con: cols=150 lines=40");
@@ -69,7 +92,6 @@ void immprimirReparNull()
     printf("\n\n\t");
     system("pause");
 }
-
 void presentacionPedi()
 {
     system("cls");
@@ -84,9 +106,9 @@ void imprimirPedi(){
     system("mode con: cols=150 lines=40");
     printf("\n\n\n\t");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 244);
-    printf("\t\t\t\t\t\t\t   LISTA DE REPARTIDORES   \t\t\t\t\t\t\t");
+    printf("\t\t\t\t\t\t\t   LISTA DE PEDIDOS   \t\t\t\t\t\t\t");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-    printf("\n\n\tId repartidor    Nombre\t     Apellidos\t\t\t Direcciï¿½n  \tTelï¿½fono\t\tE-mail");
+    printf("\n\n\tId pedido  Nombre\tDirecciï¿½n\tTelï¿½fono\t\tDescripción");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
     printf("\n\n\n");
 }
