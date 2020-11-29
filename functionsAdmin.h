@@ -173,7 +173,7 @@ void eliminarRepartidor()
 					printf("\n\tProcesando...\n");
 					Sleep(2000);
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
-					printf("\a\n\tRepartidor %d eliminado con éxito\n\n\t", aux1->id_repartidor);
+					printf("\a\n\tRepartidor %d eliminado con ï¿½xito\n\n\t", aux1->id_repartidor);
 				}
 				aux2 = aux1;
 				aux1 = aux1->siguiente;
@@ -196,7 +196,7 @@ void modificarRepartidor()
 	aux1 = primero;
 	aux2 = NULL;
 	bool encontrar = false;
-	int busqueda = 0, opcMod =0;
+	int busqueda = 0, opcMod =0, opcModi = 0;
 	imprimirRepartidor();
 	if (primero != NULL)
 	{
@@ -208,38 +208,64 @@ void modificarRepartidor()
 			printf("\tIngresa el Id que deseas modificar: \n\t");
 			busqueda = validarEntero1(1,500);
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
-			printf("\a\tSe modificarán los datos del repartidor %d\t¿Estás seguro que deseas continuar?\n\n", busqueda);
-			printf("\t1)Continuar\t\t\t\t2)Cancelar \n\n\tOpción: ");
+			printf("\a\tSe modificarï¿½n los datos del repartidor %d\tï¿½Estï¿½s seguro que deseas continuar?\n\n", busqueda);
+			printf("\t1)Continuar\t\t\t\t2)Cancelar \n\n\tOpciï¿½n: ");
 			opcMod = validarEntero1(1,2);
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
 		}while(opcMod == 2);
+
 		while (aux2 != ultimo && encontrar != true )
 		{
 		
 			if (aux1->id_repartidor == busqueda)
 			{
-				printf("\tNombre: \n\t");
-				validarCadena(&aux1->r_naa.nombre,20);
-				fflush(stdin);
-				printf("\tApellido paterno: \n\t");
-				validarCadena(&aux1->r_naa.apellidoP,20);
-				fflush(stdin);
-				printf("\tApellido Materno: \n\t");
-				validarCadena(&aux1->r_naa.apellidoM,20);
-				fflush(stdin);
-				printf("\tDirección: (Número entre 1 y 200)\n\t");
-				aux1->r_dg.direccion  = validarEntero1(1,200);
-				fflush(stdin);
-				printf("\tTeléfono: (10 Dígitos) \n\t");
-				aux1->r_dg.telefono  = validarTelefono(1000000000,9999999999);
-				printf("\tE-mail: \n\t");
-				validarCorreo1(&aux1->r_dg.email,40);
-				fflush(stdin);
-				encontrar = true;
-				printf("\n\tProcesando...\n");
-				Sleep(2000);
+				system("cls");
+				repartidorModificacionMenu();
+				opcModi = validarEntero1(1,4);
+				switch (opcModi)
+				{
+				case 1:
+					printf("\tNombre: \n\t");
+					validarCadena(&aux1->r_naa.nombre, 20);
+					fflush(stdin);
+					printf("\tApellido paterno: \n\t");
+					validarCadena(&aux1->r_naa.apellidoP, 20);
+					fflush(stdin);
+					printf("\tApellido Materno: \n\t");
+					validarCadena(&aux1->r_naa.apellidoM, 20);
+					fflush(stdin);
+					encontrar = true;
+					printf("\n\tProcesando...\n");
+					Sleep(2000);
+					break;
+				case 2:
+					printf("\tDirecciï¿½n: (Nï¿½mero entre 1 y 200)\n\t");
+					aux1->r_dg.direccion = validarEntero1(1, 200);
+					fflush(stdin);
+					encontrar = true;
+					printf("\n\tProcesando...\n");
+					Sleep(2000);
+					break;
+				case 3:
+					printf("\tTelï¿½fono: (10 Dï¿½gitos) \n\t");
+					aux1->r_dg.telefono = validarTelefono(1000000000, 9999999999);
+					encontrar = true;
+					printf("\n\tProcesando...\n");
+					Sleep(2000);
+					break;
+				case 4:
+					printf("\tE-mail: \n\t");
+					validarCorreo1(&aux1->r_dg.email, 40);
+					fflush(stdin);
+					encontrar = true;
+					printf("\n\tProcesando...\n");
+					Sleep(2000);
+				default:
+					printf("\aOpcion invalida\n\n");
+					break;
+				}
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),14);
-				printf("\a\n\tRepartidor %d modificado con éxito\n\n", aux1->id_repartidor);
+				printf("\a\n\tRepartidor %d modificado con ï¿½xito\n\n", aux1->id_repartidor);
 			}
 			aux2 = aux1; 
 			aux1 = aux1->siguiente;
@@ -441,7 +467,7 @@ void modificarPedidos()
 	struct pedidos *aux;
 	aux = primeroP;
 	bool encontrar = false;
-	int busqueda = 0;
+	int busqueda = 0, opcModi=0;
 	if (primeroP != NULL)
 	{
 		while (aux != NULL && encontrar != true)
@@ -451,23 +477,55 @@ void modificarPedidos()
 			fflush(stdin);
 			if (aux->id_pedido == busqueda)
 			{
-				fflush(stdin);
-				printf("\tNombre cliente: \n\t");
-				validarCadena(&aux->p_cd.nombreC, 20);
-				fflush(stdin);
-				printf("\tDireccion: (Nï¿½mero entre 1 y 200)\n\t");
-				aux->p_cd.direccion = validarEntero1(1, 200);
-				fflush(stdin);
-				printf("\tTelï¿½fono (10 Dï¿½gitos): \n\t");
-				aux->p_cd.telefono = validarTelefono(1000000000, 9999999999);
-				fflush(stdin);
-				printf("\tDescripciï¿½n: \n\t");
-				validarCadena(&aux->descripcion, 40);
-				fflush(stdin);
-				printf("\tPrecio total: \n\t");
-				aux->totalPago = validarEntero1(100, 500);
-				fflush(stdin);
-				encontrar = true;
+				system("cls");
+				pedidoModificacionMenu();
+				opcModi = validarEntero1(1,5);
+				switch(opcModi)
+				{
+					case 1:
+						printf("\tNombre cliente: \n\t");
+						validarCadena(&aux->p_cd.nombreC, 20);
+						fflush(stdin);
+						encontrar = true;
+						printf("\n\tProcesando...\n");
+						Sleep(2000);
+						break;
+					case 2:
+						printf("\tDireccion: (Nï¿½mero entre 1 y 200)\n\t");
+						aux->p_cd.direccion = validarEntero1(1, 200);
+						fflush(stdin);
+						encontrar = true;
+						printf("\n\tProcesando...\n");
+						Sleep(2000);
+						break;
+					case 3:
+						printf("\tTelï¿½fono (10 Dï¿½gitos): \n\t");
+						aux->p_cd.telefono = validarTelefono(1000000000, 9999999999);
+						fflush(stdin);
+						encontrar = true;
+						printf("\n\tProcesando...\n");
+						Sleep(2000);
+						break;
+					case 4:
+						printf("\tDescripciï¿½n: \n\t");
+						validarCadena(&aux->descripcion, 40);
+						fflush(stdin);
+						encontrar = true;
+						printf("\n\tProcesando...\n");
+						Sleep(2000);
+						break;
+					case 5:
+						printf("\tPrecio total: \n\t");
+						aux->totalPago = validarEntero1(100, 500);
+						fflush(stdin);
+						encontrar = true;
+						printf("\n\tProcesando...\n");
+						Sleep(2000);
+						break;
+					default:
+						printf("\a Opcion incorrecta \t\n");
+						break;
+				}
 			}
 			aux = aux->siguiente;
 			(!encontrar) ? printf("No encontrado\n") : printf("");
@@ -493,7 +551,7 @@ void asignaciones(FILE *archA)
 		printf("Asignaciones\n");
 		struct asig *pA;
 		pA = (asig *)malloc(sizeof(asig));
-		bool bandera = false;
+		bool bandera = false, bandera1 = false;
 		int num, foco = 0;
 		if (pA == NULL)
 		{
@@ -521,20 +579,27 @@ void asignaciones(FILE *archA)
 			imprimirPedidos();
 			do
 			{
-				if (foco != 0)
+				bandera = false;
+				do
 				{
-					imprimirPedidos();
-				}
-				printf("\tId_Pedido: \n\t");
-				num = validarEntero1(1, 500);
-				bandera = validaExistenciaPedido(num);
-				foco++;
-			} while (bandera == false);
+					if (foco != 0)
+					{
+						imprimirPedidos();
+					}
+					printf("\tId_Pedido: \n\t");
+					num = validarEntero1(1, 500);
+					bandera = validaExistenciaPedido(num);
+					foco++;
+				} while (bandera == false);
+				bandera1 = validaRpedido_asignado(num);
+			}while(bandera1 == false);
+			
 			pA->id_Apedi = num;
+			
 			fprintf(archA, "%d\t", pA->id_Arepa);
-			bARepa(archA, pA->id_Arepa);
-			fprintf(archA, "%d\t", pA->id_Apedi);
-			bAPedi(archA, pA->id_Apedi);
+			bARepa(archA, pA->id_Arepa, pA);
+			fprintf(archA, "%d\t", pA->id_Apedi, pA);
+			bAPedi(archA, pA->id_Apedi, pA);			
 			
 			if (primeroA == NULL)
 			{
@@ -608,7 +673,7 @@ void eliminarAsignaciones()
 					system("cls");
 					mostrarAsignaciones();
 				}
-				printf("\tIngresa el Id que deseas eliminar: \n\t");
+				printf("\tIngresa el Id de pedido que deseas eliminar: \n\t");
 				buscar = validarEntero1(1, 500);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 				printf("\a\tSe eliminarï¿½ el pedido %d\tEstï¿½s seguro que deseas continuar?\n\n", buscar);

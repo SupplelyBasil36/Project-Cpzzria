@@ -14,7 +14,6 @@ int main()
 	int opcPrincipal = 0;
 	inicializaArchivo(arch);
 	inicializaArchivoP(archP);
-	printf("787897987987979798789PITOCOMELUCIO\n");
 	inicializaArchivoA(archA);
 
 	while (opcPrincipal != 3)
@@ -32,7 +31,7 @@ int main()
 			usuario();
 			break;
 		case 3:
-			printf("\n\tLa sesión ha terminado!!! \n");
+			printf("\n\tLa sesiï¿½n ha terminado!!! \n");
 			exit(0);
 			break;
 		default:
